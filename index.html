@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LegiMedTrav-Qwen3 — Bâtir la Prévention</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>LegiMedTrav-Qwen3</h1>
+    <p>« Bâtir la Prévention » — Stratégie SST souveraine, conforme à la législation algérienne</p>
+  </header>
+
+  <main>
+    <!-- Navigation -->
+    <nav class="tabs">
+      <button class="tab active" data-target="dossier1">Dossier 1 : Dilemmes éthiques</button>
+      <button class="tab" data-target="dossier2">Dossier 2 : Surveillance médicale</button>
+      <button class="tab" data-target="dossier3">Dossier 3 : Audit & outils</button>
+      <button class="tab" data-target="dossier4">Dossier 4 : Écosystème en crise</button>
+    </nav>
+
+    <!-- Dossier 1 : Dilemmes éthiques -->
+    <section id="dossier1" class="tab-content active">
+      <h2>Dossier 1 : Dilemmes éthiques</h2>
+
+      <div class="card" id="affaire1">
+        <h3>Affaire n°1 : Le secret médical sous pression</h3>
+        <p><strong>Contexte :</strong> Un DRH exerce une pression pour obtenir des infos médicales sur un salarié en arrêts répétés.</p>
+        <button class="ai-button" onclick="interrogerIA(1)">
+          ✨ Interroger LegiMedTrav-AI (Affaire 1)
+        </button>
+        <div class="reponse-ia" id="reponse-ia-1"></div>
+      </div>
+
+      <div class="card" id="affaire2">
+        <h3>Affaire n°2 : L'obligation de conseil oubliée</h3>
+        <p><strong>Contexte :</strong> Risque psychosocial détecté — le médecin référent ne signale rien.</p>
+        <button class="ai-button" onclick="interrogerIA(2)">
+          ✨ Interroger LegiMedTrav-AI (Affaire 2)
+        </button>
+        <div class="reponse-ia" id="reponse-ia-2"></div>
+      </div>
+
+      <div class="card" id="affaire3">
+        <h3>Affaire n°3 : Le silence face au danger</h3>
+        <p><strong>Contexte :</strong> Un travailleur signale un risque imminent ignoré par la hiérarchie.</p>
+        <button class="ai-button" onclick="interrogerIA(3)">
+          ✨ Interroger LegiMedTrav-AI (Affaire 3)
+        </button>
+        <div class="reponse-ia" id="reponse-ia-3"></div>
+      </div>
+    </section>
+
+    <!-- Dossiers 2–4 (placeholders) -->
+    <section id="dossier2" class="tab-content">
+      <h2>Dossier 2 : Surveillance médicale adaptée</h2>
+      <p>À venir — Phases 1→3 (administratifs, risques renforcés, SPP)</p>
+    </section>
+
+    <section id="dossier3" class="tab-content">
+      <h2>Dossier 3 : Audit & outils réglementaires</h2>
+      <p>À venir — Fiches, registres, traçabilité</p>
+    </section>
+
+    <section id="dossier4" class="tab-content">
+      <h2>Dossier 4 : Écosystème en temps de crise</h2>
+      <p>À venir — Alertes, escalade, formation post-crise</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>LegiMedTrav-Qwen3 — Développé par Nezzal | GitHub Pages | Novembre 2025</p>
+  </footer>
+
+  <!-- Chargement des données + scripts -->
+  <script src="data/textes-sst.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
