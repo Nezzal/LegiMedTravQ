@@ -2,81 +2,153 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LegiMedTravQ — Bâtir la Prévention</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LegiMedTravQ — Analyse juridique SST (Algérie)</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 </head>
 <body>
   <header>
     <h1>LegiMedTravQ</h1>
-    <p>« Bâtir la Prévention » — Stratégie SST souveraine, conforme à la législation algérienne</p>
+    <p class="subtitle">Mission SST : Bâtir la Prévention — Outil d'analyse juridique embarqué (algérien, souverain)</p>
   </header>
 
   <main>
-    <!-- Navigation -->
-    <nav class="tabs">
-      <button class="tab active" data-target="dossier1">Dossier 1 : Dilemmes éthiques</button>
-      <button class="tab" data-target="dossier2">Dossier 2 : Surveillance médicale</button>
-      <button class="tab" data-target="dossier3">Dossier 3 : Audit & outils</button>
-      <button class="tab" data-target="dossier4">Dossier 4 : Écosystème en crise</button>
-    </nav>
+    <section class="briefing">
+      <h2>🔍 Briefing de mission</h2>
+      <p>
+        Vous êtes membre d’une équipe médico-administrative en charge de la santé et sécurité au travail (SST) en Algérie.<br>
+        Votre mission : analyser des situations réelles à l’aide du cadre légal national (code du travail, décrets, arrêtés),<br>
+        identifier les manquements, formuler des recommandations — avec rigueur, précision et références exactes.
+      </p>
+      <p class="warning">
+        ⚠️ Attention : Aucun registre d’hygiène/sécurité n’est légalement obligatoire en Algérie.<br>
+        Le SPP n’est pas codifié — il doit être construit sur la base du risque, non imposé comme schéma fixe.
+      </p>
+    </section>
 
     <!-- Dossier 1 : Dilemmes éthiques -->
-    <section id="dossier1" class="tab-content active">
-      <h2>Dossier 1 : Dilemmes éthiques</h2>
-
-      <div class="card" id="affaire1">
-        <h3>Affaire n°1 : Le secret médical sous pression</h3>
+    <section class="dossier" id="dossier-1">
+      <h2>📁 Dossier 1 : Dilemmes éthiques</h2>
+      <div class="affaire" id="affaire-1">
+        <h3>⚖️ Affaire n°1 : Le secret médical sous pression</h3>
         <p><strong>Contexte :</strong> Un DRH exerce une pression pour obtenir des infos médicales sur un salarié en arrêts répétés.</p>
-        <button class="ai-button" onclick="interrogerIA(1)">
-          ✨ Interroger LegiMedTrav-AI (Affaire 1)
-        </button>
-        <div class="reponse-ia" id="reponse-ia-1"></div>
+        <button onclick="interrogerIA(1)">Interroger LegiMedTrav-AI</button>
+        <div class="reponse" id="reponse-1"></div>
       </div>
-
-      <div class="card" id="affaire2">
-        <h3>Affaire n°2 : L'obligation de conseil oubliée</h3>
+      <div class="affaire" id="affaire-2">
+        <h3>⚖️ Affaire n°2 : L’obligation de conseil oubliée</h3>
         <p><strong>Contexte :</strong> Risque psychosocial détecté — le médecin référent ne signale rien.</p>
-        <button class="ai-button" onclick="interrogerIA(2)">
-          ✨ Interroger LegiMedTrav-AI (Affaire 2)
-        </button>
-        <div class="reponse-ia" id="reponse-ia-2"></div>
+        <button onclick="interrogerIA(2)">Interroger LegiMedTrav-AI</button>
+        <div class="reponse" id="reponse-2"></div>
       </div>
-
-      <div class="card" id="affaire3">
-        <h3>Affaire n°3 : Le silence face au danger</h3>
+      <div class="affaire" id="affaire-3">
+        <h3>⚖️ Affaire n°3 : Le silence face au danger</h3>
         <p><strong>Contexte :</strong> Un travailleur signale un risque imminent ignoré par la hiérarchie.</p>
-        <button class="ai-button" onclick="interrogerIA(3)">
-          ✨ Interroger LegiMedTrav-AI (Affaire 3)
-        </button>
-        <div class="reponse-ia" id="reponse-ia-3"></div>
+        <button onclick="interrogerIA(3)">Interroger LegiMedTrav-AI</button>
+        <div class="reponse" id="reponse-3"></div>
       </div>
     </section>
 
-    <!-- Dossiers 2–4 (placeholders) -->
-    <section id="dossier2" class="tab-content">
-      <h2>Dossier 2 : Surveillance médicale adaptée</h2>
-      <p>À venir — Phases 1→3 (administratifs, risques renforcés, SPP)</p>
+    <!-- Dossier 2 : Surveillance médicale adaptée -->
+    <section class="dossier" id="dossier-2">
+      <h2>📁 Dossier 2 : Surveillance médicale adaptée</h2>
+      <p><em>Phases 1 → 3 : administrative, risques renforcés, SPP (non codifié — à construire sur risque)</em></p>
+      <div class="affaire" id="affaire-4">
+        <h3>📋 Scénario 1 : Visite d’embauche non réalisée</h3>
+        <p><strong>Contexte :</strong> Intérimaire affecté sans visite médicale préalable.</p>
+        <button onclick="interrogerIA(4)">Interroger LegiMedTrav-AI</button>
+        <div class="reponse" id="reponse-4"></div>
+      </div>
+      <div class="affaire" id="affaire-5">
+        <h3>📋 Scénario 2 : Travailleur exposé à l’amiante — pas de suivi renforcé</h3>
+        <p><strong>Contexte :</strong> Exposition connue, mais pas de protocole SST adapté.</p>
+        <button onclick="interrogerIA(5)">Interroger LegiMedTrav-AI</button>
+        <div class="reponse" id="reponse-5"></div>
+      </div>
+      <div class="affaire" id="affaire-6">
+        <h3>📋 Scénario 3 : SPP « copié-collé » — sans analyse des risques</h3>
+        <p><strong>Contexte :</strong> Plan de prévention déposé, mais non adapté au poste réel.</p>
+        <button onclick="interrogerIA(6)">Interroger LegiMedTrav-AI</button>
+        <div class="reponse" id="reponse-6"></div>
+      </div>
     </section>
 
-    <section id="dossier3" class="tab-content">
-      <h2>Dossier 3 : Audit & outils réglementaires</h2>
-      <p>À venir — Fiches, registres, traçabilité</p>
+    <!-- Dossier 3 : Audit & outils réglementaires -->
+    <section class="dossier" id="dossier-3">
+      <h2>📁 Dossier 3 : Audit & outils réglementaires</h2>
+      <p><em>Fiches, registres, traçabilité — ce qui est obligatoire (et ce qui ne l’est pas)</em></p>
+      <div class="affaire" id="affaire-7">
+        <h3>🔍 Scénario 1 : Fiche d’exposition non tenue</h3>
+        <p><strong>Contexte :</strong> Travailleur exposé au bruit >85 dB(A) — pas de fiche individuelle.</p>
+        <button onclick="interrogerIA(7)">Interroger LegiMedTrav-AI</button>
+        <div class="reponse" id="reponse-7"></div>
+      </div>
+      <div class="affaire" id="affaire-8">
+        <h3>🔍 Scénario 2 : Registre « hygiène et sécurité » exigé par l’inspection</h3>
+        <p><strong>Contexte :</strong> Inspecteur demande un registre inexistant dans la loi algérienne.</p>
+        <button onclick="interrogerIA(8)">Interroger LegiMedTrav-AI</button>
+        <div class="reponse" id="reponse-8"></div>
+      </div>
+      <div class="affaire" id="affaire-9">
+        <h3>🔍 Scénario 3 : Absence de traçabilité des EPI</h3>
+        <p><strong>Contexte :</strong> EPI fournis, mais pas de suivi (remplacement, formation, usage).</p>
+        <button onclick="interrogerIA(9)">Interroger LegiMedTrav-AI</button>
+        <div class="reponse" id="reponse-9"></div>
+      </div>
     </section>
 
-    <section id="dossier4" class="tab-content">
-      <h2>Dossier 4 : Écosystème en temps de crise</h2>
-      <p>À venir — Alertes, escalade, formation post-crise</p>
+    <!-- Dossier 4 : Écosystème en temps de crise -->
+    <section class="dossier" id="dossier-4">
+      <h2>📁 Dossier 4 : Écosystème en temps de crise</h2>
+      <p><em>Alertes, escalade, formation post-crise — réactivité légale</em></p>
+      <div class="affaire" id="affaire-10">
+        <h3>🚨 Scénario 1 : Accident grave — pas de rapport dans les 48h</h3>
+        <p><strong>Contexte :</strong> Accident avec hospitalisation >24h — pas de déclaration à l’inspection.</p>
+        <button onclick="interrogerIA(10)">Interroger LegiMedTrav-AI</button>
+        <div class="reponse" id="reponse-10"></div>
+      </div>
+      <div class="affaire" id="affaire-11">
+        <h3>🚨 Scénario 2 : Conflit social dégénérant — SST absente de la cellule de crise</h3>
+        <p><strong>Contexte :</strong> Grève + tensions — médecin du travail non mobilisé.</p>
+        <button onclick="interrogerIA(11)">Interroger LegiMedTrav-AI</button>
+        <div class="reponse" id="reponse-11"></div>
+      </div>
+      <div class="affaire" id="affaire-12">
+        <h3>🚨 Scénario 3 : Post-crise — pas de retour d’expérience formel</h3>
+        <p><strong>Contexte :</strong> Après un incendie, aucune analyse ni mise à jour du DUERP.</p>
+        <button onclick="interrogerIA(12)">Interroger LegiMedTrav-AI</button>
+        <div class="reponse" id="reponse-12"></div>
+      </div>
+    </section>
+
+    <!-- Phase 6 : QR Code & débriefing -->
+    <section class="phase6" id="phase6">
+      <h2>✅ Phase 6 : Débriefing & partage</h2>
+      <p>Générez un QR code pointant vers cette page pour un accès hors ligne ou en formation.</p>
+      <div id="qrcode"></div>
+      <p><small>👉 Ce QR code mène à : <code>https://nezzal.github.io/LegiMedTravQ/</code></small></p>
     </section>
   </main>
 
   <footer>
-    <p>LegiMedTrav-Qwen3 — Développé par Nezzal | GitHub Pages | Novembre 2025</p>
+    <p>LegiMedTravQ — Projet souverain, embarqué, sans dépendance externe.<br>
+    Développé par Nezzal • Novembre 2025 • Conforme au droit algérien SST (Loi 88-07, Décrets 92-276/93-120, etc.)</p>
   </footer>
 
-  <!-- Chargement des données + scripts -->
   <script src="data/textes-sst.js"></script>
-  <script src="js/api.js"></script>
   <script src="js/main.js"></script>
+  <script>
+    window.addEventListener('load', () => {
+      new QRCode(document.getElementById("qrcode"), {
+        text: "https://nezzal.github.io/LegiMedTravQ/",
+        width: 160,
+        height: 160,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    });
+  </script>
 </body>
 </html>
