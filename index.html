@@ -10,4 +10,255 @@
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #121212;
-     
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background: #0f0c13;
+      text-align: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #333;
+    }
+    .logo {
+      font-size: 1.8em;
+      font-weight: bold;
+      color: #fbbf24;
+      letter-spacing: 1px;
+    }
+
+    /* ===== MENU ONGETS ===== */
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 0;
+      background: #1a1a1a;
+      border-bottom: 1px solid #333;
+      flex-wrap: wrap;
+    }
+    .tab {
+      background: #2d2d2d;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .tab:hover,
+    .tab.active {
+      background: #fbbf24;
+      color: #121212;
+    }
+    .tab i {
+      font-size: 0.9em;
+    }
+
+    /* ===== CONTENU ===== */
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+    }
+    section {
+      background: #1a1a1a;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+      border-left: 4px solid #fbbf24;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    h2 {
+      color: #fbbf24;
+      margin-bottom: 12px;
+      font-size: 1.3em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    h2 i {
+      font-size: 1.1em;
+    }
+    p, ul {
+      margin-bottom: 12px;
+    }
+    ul {
+      padding-left: 24px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    .quote {
+      background: #2d2d2d;
+      padding: 16px;
+      border-left: 3px solid #fbbf24;
+      margin: 16px 0;
+      font-style: italic;
+    }
+    .highlight {
+      color: #fbbf24;
+      font-weight: bold;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      margin: 40px 0 20px;
+      color: #718096;
+      font-size: 0.9em;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .nav-tabs {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .tab {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">LegiMedTrav</div>
+  </header>
+
+  <!-- NAVIGATION TABS -->
+  <div class="nav-tabs">
+    <div class="tab active" onclick="showSection('briefing')">
+      <i>📢</i> Briefing
+    </div>
+    <div class="tab" onclick="showSection('dossier1')">
+      <i>📁</i> Dossier 1
+    </div>
+    <div class="tab" onclick="showSection('dossier2')">
+      <i>📁</i> Dossier 2
+    </div>
+    <div class="tab" onclick="showSection('dossier3')">
+      <i>📁</i> Dossier 3
+    </div>
+    <div class="tab" onclick="showSection('dossier4')">
+      <i>📁</i> Dossier 4
+    </div>
+    <div class="tab" onclick="showSection('debriefing')">
+      <i>📝</i> Débriefing
+    </div>
+  </div>
+
+  <!-- CONTENU -->
+  <div class="container">
+
+    <!-- BRIEFING -->
+    <section id="briefing">
+      <h2>🎯 Briefing de Mission — « Bâtir la Prévention »</h2>
+      <p><strong>Directeur de Mission (Présentateur) :</strong></p>
+      <div class="quote">
+        « Bonjour, docteurs. Vous êtes mobilisés sur site à la <span class="highlight">Nouvelle Usine de Précision Algérienne (300 salariés)</span> pour mener une mission d’audit réglementaire approfondie.<br>
+        Votre objectif : explorer 4 dossiers critiques — dilemmes éthiques, surveillance médicale, outils réglementaires, gestion de crise — afin de construire une stratégie de prévention solide, conforme à la législation algérienne.<br>
+        Votre atout stratégique : <span class="highlight">LegiMedTrav-AI</span>, votre Gem juridique personnalisé, entraîné sur les textes SST algériens (Loi 88-07, Décret 93-120, Arrêtés de 2001/2003, circulaires…), et capable de répondre à des questions précises, exigeantes et contextualisées. »
+      </div>
+
+      <h2>📂 Les 4 dossiers stratégiques :</h2>
+      <ul>
+        <li>
+          <strong>📁 Dossier 1 — Dilemmes éthiques</strong><br>
+          Affaires n°1→3 : secret médical sous pression, obligation de conseil oubliée, silence face au danger.<br>
+          → Testez votre capacité à décider en conscience déontologique.
+        </li>
+        <li>
+          <strong>📁 Dossier 2 — Surveillance médicale adaptée</strong><br>
+          Phases 1→3 : administratifs, travailleurs à risques, Suivi Post-Professionnel (SPP).<br>
+          → Validez la conformité des protocoles de suivi selon la loi 11-03.
+        </li>
+        <li>
+          <strong>📁 Dossier 3 — Audit & outils réglementaires</strong><br>
+          Phase 1 + Pièces n°1→3 + Synthèse : cadre légal de l’audit, fiche de visite, registre de vaccination, traçabilité amiante.<br>
+          → Maîtrisez les 7 documents obligatoires du médecin du travail.
+        </li>
+        <li>
+          <strong>📁 Dossier 4 — Écosystème en temps de crise</strong><br>
+          Incidents 1→3 : alerte interne (SHS/CHS), escalade externe (CNAS/Inspection), gestion post-crise (formation).<br>
+          → Préparez-vous à gérer une crise réelle, pas seulement un accident.
+        </li>
+      </ul>
+
+      <h2>⚡ Méthodologie opérationnelle :</h2>
+      <ol>
+        <li><strong>Lisez</strong> le contexte et la question réglementaire détaillée,</li>
+        <li><strong>Interrogez LegiMedTrav-AI</strong> — la réponse s’appuie sur des textes algériens vérifiés,</li>
+        <li><strong>Prenez une décision</strong> : aptitude, alerte, formation, signalement...</li>
+      </ol>
+    </section>
+
+    <!-- DOSSIER 1 -->
+    <section id="dossier1" style="display:none;">
+      <h2>📁 Dossier 1 — Dilemmes éthiques</h2>
+      <p><strong>Affaire n°1 : Le secret médical sous pression</strong><br>
+      Contexte : Un DRH exerce une pression pour obtenir des infos médicales sur un salarié en arrêts répétés.</p>
+
+      <p><strong>Affaire n°2 : L'obligation de conseil oubliée</strong><br>
+      Contexte : Risque psychosocial détecté — le médecin référent ne signale rien.</p>
+
+      <p><strong>Affaire n°3 : Le silence face au danger</strong><br>
+      Contexte : Un travailleur signale un risque imminent ignoré par la hiérarchie.</p>
+    </section>
+
+    <!-- DOSSIER 2 -->
+    <section id="dossier2" style="display:none;">
+      <h2>📁 Dossier 2 — Surveillance médicale adaptée</h2>
+      <p><strong>Phases 1→3 :</strong> administratifs, travailleurs à risques, Suivi Post-Professionnel (SPP).</p>
+      <p>Validez la conformité des protocoles de suivi selon la loi 11-03.</p>
+    </section>
+
+    <!-- DOSSIER 3 -->
+    <section id="dossier3" style="display:none;">
+      <h2>📁 Dossier 3 — Audit & outils réglementaires</h2>
+      <p><strong>Phase 1 + Pièces n°1→3 + Synthèse :</strong> cadre légal de l’audit, fiche de visite, registre de vaccination, traçabilité amiante.</p>
+      <p>Maîtrisez les 7 documents obligatoires du médecin du travail.</p>
+    </section>
+
+    <!-- DOSSIER 4 -->
+    <section id="dossier4" style="display:none;">
+      <h2>📁 Dossier 4 — Écosystème en temps de crise</h2>
+      <p><strong>Incidents 1→3 :</strong> alerte interne (SHS/CHS), escalade externe (CNAS/Inspection), gestion post-crise (formation).</p>
+      <p>Préparez-vous à gérer une crise réelle, pas seulement un accident.</p>
+    </section>
+
+    <!-- DEBRIEFING -->
+    <section id="debriefing" style="display:none;">
+      <h2>📝 Débriefing</h2>
+      <p>Mission accomplie ? Merci d’avoir exploré <strong>LegiMedTrav</strong>.</p>
+      <p>Cet outil est en cours de développement. Vos retours sont précieux pour l’adapter aux besoins réels des professionnels SST en Algérie.</p>
+      <p>➡️ Prochaine étape : intégration de <span class="highlight">LegiMedTrav-AI</span> pour des réponses juridiques contextualisées.</p>
+    </section>
+
+  </div>
+
+  <footer>
+    © 2025 Nezzal Abdelmalek — Projet réalisé dans le cadre de la formation Citizencode
+  </footer>
+
+  <!-- SCRIPT NAVIGATION -->
+  <script>
+    function showSection(id) {
+      // Masquer toutes les sections
+      document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
+      // Afficher la section demandée
+      document.getElementById(id).style.display = 'block';
+
+      // Mettre à jour les onglets
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      event.target.closest('.tab').classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
