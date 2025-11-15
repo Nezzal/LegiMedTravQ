@@ -3,262 +3,507 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LegiMedTrav — Bâtir la Prévention</title>
+  <title>LegiMedTrav-Q | Mission — Bâtir la Prévention</title>
+  <meta name="description" content="Outil d'aide à la décision éthique et réglementaire pour les médecins du travail en Algérie.">
   <style>
-    /* ===== STYLE GLOBAL ===== */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* === RESET & BASE === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #121212;
-      color: #e2e8f0;
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', system-ui, sans-serif;
       line-height: 1.6;
+      padding: 20px;
     }
 
-    /* ===== HEADER ===== */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* === HEADER === */
     header {
-      background: #0f0c13;
       text-align: center;
-      padding: 15px 0;
+      padding: 30px 0;
       border-bottom: 1px solid #333;
-    }
-    .logo {
-      font-size: 1.8em;
-      font-weight: bold;
-      color: #fbbf24;
-      letter-spacing: 1px;
+      margin-bottom: 30px;
     }
 
-    /* ===== MENU ONGETS ===== */
-    .nav-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      padding: 12px 0;
-      background: #1a1a1a;
-      border-bottom: 1px solid #333;
-      flex-wrap: wrap;
+    h1 {
+      font-size: 2.4em;
+      color: #fbbf24;
+      margin-bottom: 10px;
+      font-weight: 700;
     }
+
+    .subtitle {
+      font-size: 1.1em;
+      color: #a0a0a0;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* === TAB NAVIGATION === */
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #333;
+    }
+
     .tab {
       background: #2d2d2d;
-      padding: 8px 16px;
+      color: #e0e0e0;
+      border: none;
+      padding: 10px 20px;
       border-radius: 6px;
       cursor: pointer;
+      font-family: inherit;
+      font-weight: 600;
       transition: all 0.2s;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
-    .tab:hover,
+
+    .tab:hover {
+      background: #3d3d3d;
+    }
+
     .tab.active {
       background: #fbbf24;
       color: #121212;
     }
-    .tab i {
-      font-size: 0.9em;
+
+    /* === TAB CONTENTS === */
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.4s ease;
     }
 
-    /* ===== CONTENU ===== */
-    .container {
-      max-width: 900px;
-      margin: 20px auto;
-      padding: 20px;
-    }
-    section {
-      background: #1a1a1a;
-      padding: 20px;
-      margin: 20px 0;
-      border-radius: 8px;
-      border-left: 4px solid #fbbf24;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    }
-    h2 {
-      color: #fbbf24;
-      margin-bottom: 12px;
-      font-size: 1.3em;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    h2 i {
-      font-size: 1.1em;
-    }
-    p, ul {
-      margin-bottom: 12px;
-    }
-    ul {
-      padding-left: 24px;
-    }
-    li {
-      margin-bottom: 8px;
-    }
-    .quote {
-      background: #2d2d2d;
-      padding: 16px;
-      border-left: 3px solid #fbbf24;
-      margin: 16px 0;
-      font-style: italic;
-    }
-    .highlight {
-      color: #fbbf24;
-      font-weight: bold;
+    .tab-content.active {
+      display: block;
     }
 
-    /* ===== FOOTER ===== */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* === DOSSIER-SPECIFIC STYLES (already defined in Dossier 1 section) === */
+    /* (No duplication — Dossier 1’s <style> remains embedded for modularity) */
+
+    /* === FOOTER === */
     footer {
+      margin-top: 50px;
       text-align: center;
-      margin: 40px 0 20px;
-      color: #718096;
+      padding: 20px;
+      color: #777;
       font-size: 0.9em;
+      border-top: 1px solid #333;
     }
 
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 768px) {
-      .nav-tabs {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .tab {
-        text-align: center;
-      }
+    /* Responsive */
+    @media (max-width: 600px) {
+      .tabs { flex-direction: column; }
+      h1 { font-size: 2em; }
     }
   </style>
 </head>
 <body>
-
-  <!-- HEADER -->
-  <header>
-    <div class="logo">LegiMedTrav</div>
-  </header>
-
-  <!-- NAVIGATION TABS -->
-  <div class="nav-tabs">
-    <div class="tab active" onclick="showSection('briefing')">
-      <i>📢</i> Briefing
-    </div>
-    <div class="tab" onclick="showSection('dossier1')">
-      <i>📁</i> Dossier 1
-    </div>
-    <div class="tab" onclick="showSection('dossier2')">
-      <i>📁</i> Dossier 2
-    </div>
-    <div class="tab" onclick="showSection('dossier3')">
-      <i>📁</i> Dossier 3
-    </div>
-    <div class="tab" onclick="showSection('dossier4')">
-      <i>📁</i> Dossier 4
-    </div>
-    <div class="tab" onclick="showSection('debriefing')">
-      <i>📝</i> Débriefing
-    </div>
-  </div>
-
-  <!-- CONTENU -->
   <div class="container">
+    <header>
+      <h1>🛡️ LegiMedTrav-Q</h1>
+      <p class="subtitle">Mission — Bâtir la Prévention<br><em>Un outil pour les médecins du travail en Algérie — Conçu par Nezzal Abdelmalek</em></p>
+    </header>
 
-    <!-- BRIEFING -->
-    <section id="briefing">
-      <h2>🎯 Briefing de Mission — « Bâtir la Prévention »</h2>
-      <p><strong>Directeur de Mission (Présentateur) :</strong></p>
-      <div class="quote">
-        « Bonjour, docteurs. Vous êtes mobilisés sur site à la <span class="highlight">Nouvelle Usine de Précision Algérienne (300 salariés)</span> pour mener une mission d’audit réglementaire approfondie.<br>
-        Votre objectif : explorer 4 dossiers critiques — dilemmes éthiques, surveillance médicale, outils réglementaires, gestion de crise — afin de construire une stratégie de prévention solide, conforme à la législation algérienne.<br>
-        Votre atout stratégique : <span class="highlight">LegiMedTrav-AI</span>, votre Gem juridique personnalisé, entraîné sur les textes SST algériens (Loi 88-07, Décret 93-120, Arrêtés de 2001/2003, circulaires…), et capable de répondre à des questions précises, exigeantes et contextualisées. »
+    <!-- Navigation principale -->
+    <div class="tabs">
+      <button class="tab active" data-tab="briefing">Briefing</button>
+      <button class="tab" data-tab="dossier1">Dossier 1</button>
+      <button class="tab" data-tab="dossier2">Dossier 2</button>
+      <button class="tab" data-tab="dossier3">Dossier 3</button>
+      <button class="tab" data-tab="dossier4">Dossier 4</button>
+      <button class="tab" data-tab="debriefing">Débriefing</button>
+    </div>
+
+    <!-- ================ BRIEFING ================ -->
+    <div id="briefing" class="tab-content active">
+      <h2>📌 Briefing narratif</h2>
+      <p><strong>À l’attention du Directeur de la Médecine du Travail,</strong></p>
+      <p>Dans le cadre de la modernisation de notre dispositif SST, vous êtes chargé·e d’évaluer la conformité éthique et réglementaire de cas réels soumis par les équipes terrain — en vous appuyant sur <strong>LegiMedTrav-AI</strong>, notre assistant juridique dédié à la médecine du travail en Algérie.</p>
+      <p>📌 <strong>Votre mission :</strong> Lire → Interroger l’IA → Décider — en vous fondant sur les textes algériens (Loi 88-07, Décrets 92-276 & 93-120, etc.)</p>
+      <p>➡️ Passez aux dossiers pour commencer.</p>
+    </div>
+
+    <!-- ================ DOSSIER 1 (Updated) ================ -->
+    <!-- DOSSIER 1 : Dilemmes éthiques et devoirs du médecin -->
+    <div id="dossier1" class="tab-content">
+      <div class="folder-header">
+        <span class="folder-icon">📁</span>
+        <h2>Dossier 1 : Dilemmes éthiques et devoirs du médecin</h2>
       </div>
 
-      <h2>📂 Les 4 dossiers stratégiques :</h2>
-      <ul>
-        <li>
-          <strong>📁 Dossier 1 — Dilemmes éthiques</strong><br>
-          Affaires n°1→3 : secret médical sous pression, obligation de conseil oubliée, silence face au danger.<br>
-          → Testez votre capacité à décider en conscience déontologique.
-        </li>
-        <li>
-          <strong>📁 Dossier 2 — Surveillance médicale adaptée</strong><br>
-          Phases 1→3 : administratifs, travailleurs à risques, Suivi Post-Professionnel (SPP).<br>
-          → Validez la conformité des protocoles de suivi selon la loi 11-03.
-        </li>
-        <li>
-          <strong>📁 Dossier 3 — Audit & outils réglementaires</strong><br>
-          Phase 1 + Pièces n°1→3 + Synthèse : cadre légal de l’audit, fiche de visite, registre de vaccination, traçabilité amiante.<br>
-          → Maîtrisez les 7 documents obligatoires du médecin du travail.
-        </li>
-        <li>
-          <strong>📁 Dossier 4 — Écosystème en temps de crise</strong><br>
-          Incidents 1→3 : alerte interne (SHS/CHS), escalade externe (CNAS/Inspection), gestion post-crise (formation).<br>
-          → Préparez-vous à gérer une crise réelle, pas seulement un accident.
-        </li>
+      <!-- Onglets d'affaires -->
+      <div class="affaire-tabs">
+        <button class="affaire-tab active" data-affaire="1">Affaire n°1</button>
+        <button class="affaire-tab" data-affaire="2">Affaire n°2</button>
+        <button class="affaire-tab" data-affaire="3">Affaire n°3</button>
+      </div>
+
+      <!-- Contenu des affaires -->
+      <div id="affaire1" class="affaire-content active">
+        <h3><span class="lock-icon">🔒</span> Affaire n°1 : Le secret médical sous pression</h3>
+        <div class="case-summary">
+          Un Directeur des Ressources Humaines exerce une pression sur le médecin du travail pour obtenir des informations médicales sur un salarié en arrêts maladie répétés.
+        </div>
+
+        <div class="question-section">
+          <h4><span class="question-icon">📋</span> Question à poser à LegiMedTrav :</h4>
+          <ol>
+            <li><strong>SECRET PROFESSIONNEL - CADRE LÉGAL :</strong>
+              <ol type="a">
+                <li>Le secret professionnel du médecin du travail comporte-t-il des exceptions face aux demandes d'un employeur ?</li>
+                <li>Citez les articles PRÉCIS du Code de Déontologie Médicale (Décret exécutif n° 92-276 du 06 juillet 1992, JO n° 52 du 08 juillet 1992, page 1160) définissant l'étendue et les limites du secret professionnel.</li>
+                <li>Précisez le numéro d'article ET reproduisez l'extrait pertinent du texte.</li>
+              </ol>
+            </li>
+            <li><strong>COMMUNICATION AUTORISÉE :</strong>
+              <ol type="a">
+                <li>Quelles informations le médecin du travail PEUT-il légalement communiquer à l'employeur concernant un salarié ?</li>
+                <li>Quelles informations sont STRICTEMENT INTERDITES de communication ?</li>
+                <li>Citez l'article du Décret 93-120 (relatif à l'organisation de la médecine du travail) précisant le contenu de l'avis d'aptitude.</li>
+              </ol>
+            </li>
+            <li><strong>CONSÉQUENCES JURIDIQUES D'UNE VIOLATION :</strong>
+              <ol type="a">
+                <li>Listez les trois types de responsabilités engagées en cas de violation du secret professionnel.</li>
+                <li>Pour chaque type, citez la base légale PRÉCISE (loi, décret, code, article).</li>
+                <li>Précisez les sanctions applicables selon chaque texte.</li>
+              </ol>
+            </li>
+          </ol>
+        </div>
+
+        <div class="response-format">
+          <strong>FORMAT DE RÉPONSE EXIGÉ :</strong><br>
+          - Chaque affirmation doit être suivie de : [Référence : Texte, Article, Alinéa]<br>
+          - Exemple : "Le secret professionnel est absolu. [Référence : Code de Déontologie Médicale, Décret 92-276, Article 36, Alinéa 1]"
+        </div>
+
+        <div class="ai-button-container">
+          <button class="ai-button">✨ Interroger LegiMedTrav-AI</button>
+        </div>
+      </div>
+
+      <div id="affaire2" class="affaire-content">
+        <h3><span class="lock-icon">🔒</span> Affaire n°2 : L'obligation de conseil oubliée</h3>
+        <div class="case-summary">
+          Lors d’une visite, vous détectez un risque psychosocial majeur, mais le médecin référent ne signale rien à l’employeur. Vous vous interrogez sur votre responsabilité.
+        </div>
+
+        <div class="question-section">
+          <h4><span class="question-icon">📋</span> Question à poser à LegiMedTrav :</h4>
+          <ol>
+            <li><strong>MISSION FONDAMENTALE DU MÉDECIN DU TRAVAIL :</strong>
+              <ol type="a">
+                <li>Selon la Loi 88-07 relative à l'hygiène, la sécurité et la médecine du travail, quelle est la nature de la mission du médecin du travail ?</li>
+                <li>Citez PRÉCISÉMENT l'article de la Loi 88-07 définissant cette mission.</li>
+                <li>Reproduisez l'extrait pertinent du texte législatif.</li>
+              </ol>
+            </li>
+            <li><strong>ÉTENDUE DE LA MISSION - INDIVIDU VS COLLECTIF :</strong>
+              <ol type="a">
+                <li>Le rôle du médecin du travail se limite-t-il au suivi médical individuel des salariés ?</li>
+                <li>Quelle obligation a-t-il concernant l'action sur le milieu de travail ?</li>
+                <li>Citez l'article de la Loi 88-07 précisant cette obligation d'action sur l'environnement de travail.</li>
+                <li>Le médecin du travail a-t-il une contrainte temporelle réglementaire (proportion de temps minimum) pour son action sur le milieu ? Si oui, citez le texte. Si non, précisez que cette proportion n'existe pas dans la législation algérienne.</li>
+              </ol>
+            </li>
+            <li><strong>OBLIGATION DE CONSEIL ENVERS L'EMPLOYEUR :</strong>
+              <ol type="a">
+                <li>Le médecin du travail a-t-il une obligation de conseil actif envers l'employeur ?</li>
+                <li>Citez l'article du Décret exécutif n° 93-120 du 15 mai 1993 (relatif à l'organisation de la médecine du travail) définissant cette fonction de conseil.</li>
+                <li>Quels sont les outils réglementaires permettant au médecin de formaliser ses recommandations à l'employeur ? (précisez notamment le rôle du rapport annuel)</li>
+              </ol>
+            </li>
+            <li><strong>CONSÉQUENCES JURIDIQUES D'UN DÉFAUT D'ACTION COLLECTIVE :</strong>
+              <ol type="a">
+                <li>Un médecin qui se limite aux soins individuels sans agir sur les causes collectives identifiées engage-t-il sa responsabilité ?</li>
+                <li>Sur quelle base légale cette responsabilité peut-elle être invoquée ?</li>
+              </ol>
+            </li>
+          </ol>
+        </div>
+
+        <div class="response-format">
+          <strong>FORMAT DE RÉPONSE EXIGÉ :</strong><br>
+          - Chaque affirmation doit être suivie de : [Référence : Texte, Article, Alinéa]<br>
+          - Précisez si une information n'existe PAS dans la législation algérienne (exemple : "Il n'existe aucune proportion temporelle fixée par la loi algérienne pour l'action sur le milieu")
+        </div>
+
+        <div class="ai-button-container">
+          <button class="ai-button">✨ Interroger LegiMedTrav-AI</button>
+        </div>
+      </div>
+
+      <div id="affaire3" class="affaire-content">
+        <h3><span class="lock-icon">🔒</span> Affaire n°3 : La double loyauté impossible</h3>
+        <div class="case-summary">
+          Un salarié vous confie qu’il subit des menaces de licenciement s’il refuse de travailler en présence de substances dangereuses. L'employeur vous demande de certifier son aptitude.
+        </div>
+
+        <div class="question-section">
+          <h4><span class="question-icon">📋</span> Question à poser à LegiMedTrav :</h4>
+          <ol>
+            <li><strong>CONFLIT D'INTÉRÊTS ET LOYAUTÉ DU MÉDECIN :</strong>
+              <ol type="a">
+                <li>Le médecin du travail peut-il être tenu pour responsable s'il certifie l'aptitude d’un salarié dans un contexte de menace ou de coercition ?</li>
+                <li>Quel principe déontologique s'applique ici ? Citez l'article du Code de Déontologie Médicale applicable.</li>
+                <li>Le médecin du travail est-il tenu de refuser de signer un avis d'aptitude s’il a connaissance d'une situation de danger ou de pression ?</li>
+              </ol>
+            </li>
+            <li><strong>AVIS D'APTITUDE ET DANGERS IDENTIFIÉS :</strong>
+              <ol type="a">
+                <li>Si un danger est identifié sur le poste, quelles mentions doivent figurer obligatoirement dans l'avis d'aptitude ?</li>
+                <li>Le médecin peut-il conditionner l'aptitude à des aménagements spécifiques ? Si oui, citez le texte réglementaire autorisant cette pratique.</li>
+                <li>En cas de désaccord entre le médecin et l'employeur sur les conditions de travail, quel recours existe-t-il ?</li>
+              </ol>
+            </li>
+            <li><strong>PROTECTION DU SALARIÉ ET DROIT À REFUSER :</strong>
+              <ol type="a">
+                <li>Le salarié a-t-il un droit légal de refuser un poste dangereux ? Citez l'article de la Loi 88-07 qui le garantit.</li>
+                <li>Le médecin du travail peut-il appuyer juridiquement ce refus ? Comment ?</li>
+                <li>Quelle est la conséquence légale pour l'employeur qui punit un salarié ayant exercé ce droit ?</li>
+              </ol>
+            </li>
+          </ol>
+        </div>
+
+        <div class="response-format">
+          <strong>FORMAT DE RÉPONSE EXIGÉ :</strong><br>
+          - Chaque affirmation doit être suivie de : [Référence : Texte, Article, Alinéa]<br>
+          - Exemple : "Le médecin du travail ne peut certifier l'aptitude en cas de danger avéré. [Référence : Code de Déontologie Médicale, Décret 92-276, Article 37, Alinéa 2]"
+        </div>
+
+        <div class="ai-button-container">
+          <button class="ai-button">✨ Interroger LegiMedTrav-AI</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================ DOSSIER 2 ================ -->
+    <div id="dossier2" class="tab-content">
+      <h2>📁 Dossier 2 : Exposition aux agents chimiques</h2>
+      <p><em>Contenu à compléter ultérieurement.</em></p>
+    </div>
+
+    <!-- ================ DOSSIER 3 ================ -->
+    <div id="dossier3" class="tab-content">
+      <h2>📁 Dossier 3 : Santé mentale et risques psychosociaux</h2>
+      <p><em>Contenu à compléter ultérieurement.</em></p>
+    </div>
+
+    <!-- ================ DOSSIER 4 ================ -->
+    <div id="dossier4" class="tab-content">
+      <h2>📁 Dossier 4 : Suivi post-professionnel & pathologies émergentes</h2>
+      <p><em>Contenu à compléter ultérieurement.</em></p>
+    </div>
+
+    <!-- ================ DEBRIEFING ================ -->
+    <div id="debriefing" class="tab-content">
+      <h2>🎯 Débriefing & Prochaines étapes</h2>
+      <p>✅ Vous avez exploré les principaux dilemmes éthiques du médecin du travail.</p>
+      <p>➡️ Prochaines actions :</p>
+      <ul style="margin-left: 20px; margin-top: 10px;">
+        <li>Intégration de l’appel à l’IA via <code>legimedtravq-proxy-clean</code></li>
+        <li>Alimentation des dossiers 2 à 4 avec cas réels</li>
+        <li>Déploiement CI/CD (GitHub Actions)</li>
       </ul>
+      <p><em>Merci pour votre engagement dans la prévention — SST, c’est d’abord de l’humain.</em></p>
+    </div>
 
-      <h2>⚡ Méthodologie opérationnelle :</h2>
-      <ol>
-        <li><strong>Lisez</strong> le contexte et la question réglementaire détaillée,</li>
-        <li><strong>Interrogez LegiMedTrav-AI</strong> — la réponse s’appuie sur des textes algériens vérifiés,</li>
-        <li><strong>Prenez une décision</strong> : aptitude, alerte, formation, signalement...</li>
-      </ol>
-    </section>
-
-    <!-- DOSSIER 1 -->
-    <section id="dossier1" style="display:none;">
-      <h2>📁 Dossier 1 — Dilemmes éthiques</h2>
-      <p><strong>Affaire n°1 : Le secret médical sous pression</strong><br>
-      Contexte : Un DRH exerce une pression pour obtenir des infos médicales sur un salarié en arrêts répétés.</p>
-
-      <p><strong>Affaire n°2 : L'obligation de conseil oubliée</strong><br>
-      Contexte : Risque psychosocial détecté — le médecin référent ne signale rien.</p>
-
-      <p><strong>Affaire n°3 : Le silence face au danger</strong><br>
-      Contexte : Un travailleur signale un risque imminent ignoré par la hiérarchie.</p>
-    </section>
-
-    <!-- DOSSIER 2 -->
-    <section id="dossier2" style="display:none;">
-      <h2>📁 Dossier 2 — Surveillance médicale adaptée</h2>
-      <p><strong>Phases 1→3 :</strong> administratifs, travailleurs à risques, Suivi Post-Professionnel (SPP).</p>
-      <p>Validez la conformité des protocoles de suivi selon la loi 11-03.</p>
-    </section>
-
-    <!-- DOSSIER 3 -->
-    <section id="dossier3" style="display:none;">
-      <h2>📁 Dossier 3 — Audit & outils réglementaires</h2>
-      <p><strong>Phase 1 + Pièces n°1→3 + Synthèse :</strong> cadre légal de l’audit, fiche de visite, registre de vaccination, traçabilité amiante.</p>
-      <p>Maîtrisez les 7 documents obligatoires du médecin du travail.</p>
-    </section>
-
-    <!-- DOSSIER 4 -->
-    <section id="dossier4" style="display:none;">
-      <h2>📁 Dossier 4 — Écosystème en temps de crise</h2>
-      <p><strong>Incidents 1→3 :</strong> alerte interne (SHS/CHS), escalade externe (CNAS/Inspection), gestion post-crise (formation).</p>
-      <p>Préparez-vous à gérer une crise réelle, pas seulement un accident.</p>
-    </section>
-
-    <!-- DEBRIEFING -->
-    <section id="debriefing" style="display:none;">
-      <h2>📝 Débriefing</h2>
-      <p>Mission accomplie ? Merci d’avoir exploré <strong>LegiMedTrav</strong>.</p>
-      <p>Cet outil est en cours de développement. Vos retours sont précieux pour l’adapter aux besoins réels des professionnels SST en Algérie.</p>
-      <p>➡️ Prochaine étape : intégration de <span class="highlight">LegiMedTrav-AI</span> pour des réponses juridiques contextualisées.</p>
-    </section>
-
+    <footer>
+      🛠️ <strong>LegiMedTrav-Q</strong> — Projet développé par <a href="https://github.com/Nezzal" style="color:#fbbf24">Nezzal Abdelmalek</a> • Nov. 2025<br>
+      🌐 Déployé sur <a href="https://nezzal.github.io/LegiMedTravQ/" style="color:#fbbf24">GitHub Pages</a>
+    </footer>
   </div>
 
-  <footer>
-    © 2025 Nezzal Abdelmalek — Projet réalisé dans le cadre de la formation Citizencode
-  </footer>
-
-  <!-- SCRIPT NAVIGATION -->
-  <script>
-    function showSection(id) {
-      // Masquer toutes les sections
-      document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
-      // Afficher la section demandée
-      document.getElementById(id).style.display = 'block';
-
-      // Mettre à jour les onglets
-      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-      event.target.closest('.tab').classList.add('active');
+  <!-- STYLES EMBARQUÉS POUR DOSSIER 1 -->
+  <style>
+    /* Styles spécifiques au Dossier 1 */
+    #dossier1 {
+      padding: 20px;
+      background-color: #1a1a1a;
+      border-radius: 8px;
+      color: #e0e0e0;
+      font-family: 'Courier New', Courier, monospace;
     }
-  </script>
 
+    .folder-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #333;
+    }
+
+    .folder-header h2 {
+      font-size: 1.4em;
+      color: #fbbf24;
+      margin: 0;
+    }
+
+    .affaire-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .affaire-tab {
+      background: #2d2d2d;
+      color: #e0e0e0;
+      border: 1px solid #444;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .affaire-tab:hover {
+      background: #3d3d3d;
+    }
+
+    .affaire-tab.active {
+      background: #fbbf24;
+      color: #121212;
+      border-color: #fbbf24;
+    }
+
+    .affaire-content {
+      display: none;
+      padding: 20px;
+      background: #1e1e1e;
+      border-radius: 6px;
+      border-left: 4px solid #fbbf24;
+      margin-top: 10px;
+    }
+
+    .affaire-content.active {
+      display: block;
+    }
+
+    .lock-icon {
+      color: #fbbf24;
+      margin-right: 8px;
+    }
+
+    .case-summary {
+      background: #252525;
+      padding: 12px;
+      border-radius: 6px;
+      margin: 15px 0;
+      font-style: italic;
+      border-left: 3px solid #fbbf24;
+    }
+
+    .question-section ol {
+      padding-left: 20px;
+      line-height: 1.6;
+    }
+
+    .question-section ol li {
+      margin: 8px 0;
+    }
+
+    .response-format {
+      margin: 20px 0;
+      padding: 15px;
+      background: #252525;
+      border-radius: 6px;
+      font-size: 0.9em;
+      border-left: 3px solid #fbbf24;
+    }
+
+    .ai-button-container {
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    .ai-button {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: #121212;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      font-size: 1em;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    .ai-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+    }
+
+    .ai-button:active {
+      transform: translateY(0);
+    }
+  </style>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Gestion des onglets principaux (Briefing, Dossiers, etc.)
+    document.addEventListener('DOMContentLoaded', function () {
+      const mainTabs = document.querySelectorAll('.tab');
+      const mainContents = document.querySelectorAll('.tab-content');
+
+      mainTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          // Désactiver tous les onglets et contenus
+          mainTabs.forEach(t => t.classList.remove('active'));
+          mainContents.forEach(c => c.classList.remove('active'));
+
+          // Activer l'onglet cliqué
+          tab.classList.add('active');
+
+          // Afficher le contenu correspondant
+          const targetId = tab.dataset.tab;
+          document.getElementById(targetId).classList.add('active');
+        });
+      });
+
+      // Gestion des onglets d'affaires dans le Dossier 1
+      const affaireTabs = document.querySelectorAll('.affaire-tab');
+      const affaireContents = document.querySelectorAll('.affaire-content');
+
+      affaireTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          affaireTabs.forEach(t => t.classList.remove('active'));
+          affaireContents.forEach(c => c.classList.remove('active'));
+
+          tab.classList.add('active');
+
+          const affaireId = tab.dataset.affaire;
+          document.getElementById(`affaire${affaireId}`).classList.add('active');
+        });
+      });
+
+      // Initialisation : afficher la première affaire par défaut
+      if (affaireContents.length > 0) {
+        affaireContents[0].classList.add('active');
+      }
+    });
+  </script>
 </body>
 </html>
