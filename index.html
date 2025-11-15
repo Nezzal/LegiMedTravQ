@@ -5,96 +5,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>LegiMedTravQ — SST Algérie</title>
   <style>
-    /* ===== STYLE GLOBAL ===== */
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0; padding: 0;
-      background: #f5f7fa;
-      color: #333;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8fafc;
+      color: #2d3748;
+      line-height: 1.6;
     }
 
     /* ===== MENU DE NAVIGATION ===== */
     .nav-menu {
       position: sticky;
       top: 0;
-      background: #2c3e50;
-      padding: 0;
-      margin: 0;
-      list-style: none;
+      background: #1a365d;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 4px;
-      z-index: 100;
+      gap: 6px;
+      padding: 8px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      z-index: 100;
     }
     .nav-menu a {
-      display: block;
-      padding: 14px 18px;
-      color: #ecf0f1;
+      color: #e2e8f0;
       text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 6px;
       font-weight: 500;
-      font-size: 0.95em;
       transition: all 0.2s;
-      border-radius: 4px;
     }
     .nav-menu a:hover,
     .nav-menu a.active {
-      background: #3498db;
+      background: #3182ce;
       color: white;
     }
 
-    /* ===== CONTENU PRINCIPAL ===== */
+    /* ===== CONTENU ===== */
     .container {
       max-width: 900px;
       margin: 30px auto;
       padding: 0 20px;
     }
-    section {
-      scroll-margin-top: 70px; /* pour compenser le menu fixe */
-      background: white;
-      padding: 25px;
-      margin: 25px 0;
-      border-radius: 8px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px 0;
     }
     h1 {
-      text-align: center;
-      color: #2c3e50;
-      margin: 40px 0 20px;
       font-size: 1.8em;
+      color: #1a202c;
+      margin-bottom: 8px;
     }
-    h2 {
-      color: #2980b9;
-      border-bottom: 2px solid #3498db;
-      padding-bottom: 6px;
-      margin-top: 0;
-    }
-    h3 {
-      color: #16a085;
-      margin-top: 20px;
-    }
-    .affaire {
-      background: #f8fafc;
-      padding: 16px;
-      border-left: 4px solid #3498db;
-      margin: 16px 0;
-      border-radius: 0 6px 6px 0;
+    .subtitle {
+      color: #4a5568;
+      font-size: 1.1em;
     }
 
-    /* ===== FOOTER ===== */
+    section {
+      scroll-margin-top: 70px;
+      background: white;
+      padding: 24px;
+      margin: 24px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    h2 {
+      color: #2c5282;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #cbd5e0;
+    }
+    h3 {
+      color: #2b6cb0;
+      margin: 18px 0 8px;
+    }
+    p, li {
+      margin-bottom: 12px;
+    }
+    ul {
+      padding-left: 24px;
+    }
+
     footer {
       text-align: center;
       margin: 40px 0 20px;
-      color: #7f8c8d;
+      color: #718096;
       font-size: 0.9em;
     }
   </style>
 </head>
 <body>
 
-  <!-- ===== MENU DE NAVIGATION ===== -->
+  <!-- MENU -->
   <nav>
     <ul class="nav-menu" id="navMenu">
       <li><a href="#briefing" class="nav-link">📌 Briefing</a></li>
@@ -106,15 +108,16 @@
     </ul>
   </nav>
 
-  <!-- ===== CONTENU ===== -->
   <div class="container">
-
-    <h1>🩺 LegiMedTravQ — SST Algérie</h1>
+    <header>
+      <h1>🩺 LegiMedTravQ</h1>
+      <div class="subtitle">Outil d’aide à la décision éthique et réglementaire en Santé et Sécurité au Travail — Algérie</div>
+    </header>
 
     <!-- BRIEFING -->
     <section id="briefing">
       <h2>📌 Briefing</h2>
-      <p><strong>Objectif :</strong> Aider les professionnels de la SST (médecins du travail, préventeurs) à analyser les dilemmes éthiques et juridiques dans le cadre du droit algérien du travail.</p>
+      <p><strong>Objectif :</strong> Aider les professionnels de la SST (médecins du travail, préventeurs, référents sécurité) à analyser les dilemmes éthiques et juridiques dans le cadre du droit algérien du travail.</p>
       <p><strong>Méthode :</strong> Chaque dossier présente des cas réels ou typiques. Vous pouvez explorer les affaires, réfléchir aux enjeux, puis — si souhaité — poser une question à l’IA pour obtenir un éclairage réglementaire.</p>
     </section>
 
@@ -122,62 +125,40 @@
     <section id="dossier1">
       <h2>📁 Dossier 1 : Dilemmes éthiques</h2>
 
-      <div class="affaire">
-        <h3>🔸 Affaire n°1 : Le secret médical sous pression</h3>
-        <p><strong>Contexte :</strong> Un DRH exerce une pression pour obtenir des informations médicales sur un salarié en arrêts maladie répétés.</p>
-      </div>
+      <h3>Affaire n°1 : Le secret médical sous pression</h3>
+      <p><strong>Contexte :</strong> Un DRH exerce une pression pour obtenir des infos médicales sur un salarié en arrêts répétés.</p>
 
-      <div class="affaire">
-        <h3>🔸 Affaire n°2 : L'obligation de conseil oubliée</h3>
-        <p><strong>Contexte :</strong> Un risque psychosocial est détecté, mais le médecin référent ne signale rien à la hiérarchie.</p>
-      </div>
+      <h3>Affaire n°2 : L'obligation de conseil oubliée</h3>
+      <p><strong>Contexte :</strong> Risque psychosocial détecté — le médecin référent ne signale rien.</p>
 
-      <div class="affaire">
-        <h3>🔸 Affaire n°3 : Le silence face au danger</h3>
-        <p><strong>Contexte :</strong> Un travailleur signale un risque imminent (ex. machine défectueuse), mais la hiérarchie l’ignore.</p>
-      </div>
+      <h3>Affaire n°3 : Le silence face au danger</h3>
+      <p><strong>Contexte :</strong> Un travailleur signale un risque imminent ignoré par la hiérarchie.</p>
     </section>
 
     <!-- DOSSIER 2 -->
     <section id="dossier2">
       <h2>📁 Dossier 2 : Surveillance médicale adaptée</h2>
-      <p>À venir — Organisation du suivi médical selon les postes :</p>
-      <ul>
-        <li>Administratifs (bureau)</li>
-        <li>Risques renforcés (bruit, poussières, postures)</li>
-        <li>Postes à Surveillance Particulière (SPP)</li>
-      </ul>
+      <p>À venir — Phases 1→3 (administratifs, risques renforcés, SPP)</p>
     </section>
 
     <!-- DOSSIER 3 -->
     <section id="dossier3">
       <h2>📁 Dossier 3 : Audit & outils réglementaires</h2>
-      <p>À venir — Documents clés à maîtriser :</p>
-      <ul>
-        <li>Fiches de poste</li>
-        <li>Registre des risques</li>
-        <li>Dossier médical du travailleur</li>
-        <li>Rapport annuel d’activité</li>
-      </ul>
+      <p>À venir — Fiches, registres, traçabilité</p>
     </section>
 
     <!-- DOSSIER 4 -->
     <section id="dossier4">
       <h2>📁 Dossier 4 : Écosystème en temps de crise</h2>
-      <p>À revenir — Gestion coordonnée des crises :</p>
-      <ul>
-        <li>Alertes internes & externes</li>
-        <li>Collaboration CHS / Inspection / CNAS / Hygiène</li>
-        <li>Retour d’expérience post-crise</li>
-      </ul>
+      <p>À venir — Alertes, escalade, formation post-crise</p>
     </section>
 
     <!-- DEBRIEFING -->
     <section id="debriefing">
       <h2>📝 Debriefing</h2>
       <p>Merci d’avoir exploré <strong>LegiMedTravQ</strong> !</p>
-      <p>Cet outil est en cours de développement. Vos retours sont précieux pour l’adapter aux besoins réels des professionnels SST en Algérie.</p>
-      <p>➡️ Prochaine étape : intégration de l’IA via proxy sécurisé pour des réponses contextualisées.</p>
+      <p>Ce projet est en cours de développement. Vos retours sont précieux pour l’adapter aux besoins réels des professionnels SST en Algérie.</p>
+      <p>➡️ Prochaine étape : intégration d’une IA réglementaire via proxy sécurisé.</p>
     </section>
 
   </div>
@@ -186,7 +167,7 @@
     © 2025 Nezzal Abdelmalek — Projet réalisé dans le cadre de la formation Citizencode
   </footer>
 
-  <!-- ===== SCRIPT NAVIGATION ===== -->
+  <!-- NAVIGATION SCRIPT -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const navLinks = document.querySelectorAll('.nav-link');
@@ -197,37 +178,34 @@
         link.addEventListener('click', (e) => {
           e.preventDefault();
           const targetId = link.getAttribute('href');
-          const targetSection = document.querySelector(targetId);
-          if (targetSection) {
+          const target = document.querySelector(targetId);
+          if (target) {
             window.scrollTo({
-              top: targetSection.offsetTop - 70, // compense le menu fixe
+              top: target.offsetTop - 70,
               behavior: 'smooth'
             });
           }
         });
       });
 
-      // Mettre à jour la classe "active" en scrollant
-      const updateActiveLink = () => {
-        let currentSection = '';
-        sections.forEach(section => {
-          const sectionTop = section.offsetTop - 80;
-          const sectionHeight = section.offsetHeight;
-          if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
-            currentSection = section.getAttribute('id');
+      // Mise à jour de l'onglet actif
+      const updateActive = () => {
+        let current = '';
+        sections.forEach(sec => {
+          const top = sec.offsetTop - 80;
+          const bottom = top + sec.offsetHeight;
+          if (window.scrollY >= top && window.scrollY < bottom) {
+            current = sec.getAttribute('id');
           }
         });
 
         navLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === `#${currentSection}`) {
-            link.classList.add('active');
-          }
+          link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
         });
       };
 
-      window.addEventListener('scroll', updateActiveLink);
-      updateActiveLink(); // au chargement
+      window.addEventListener('scroll', updateActive);
+      updateActive(); // au chargement
     });
   </script>
 
