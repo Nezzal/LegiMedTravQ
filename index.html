@@ -3,88 +3,233 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LegiMedTravQ — Proxy Test</title>
+  <title>LegiMedTravQ — SST Algérie</title>
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
-    textarea { width: 100%; height: 80px; margin: 0.5rem 0; padding: 0.75rem; border: 1px solid #ccc; border-radius: 6px; }
-    button { background: #0070f3; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; cursor: pointer; }
-    button:disabled { opacity: 0.6; cursor: not-allowed; }
-    #response { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 6px; white-space: pre-wrap; }
-    .error { background: #ffe6e6; color: #d32f2f; }
+    /* ===== STYLE GLOBAL ===== */
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0; padding: 0;
+      background: #f5f7fa;
+      color: #333;
+    }
+
+    /* ===== MENU DE NAVIGATION ===== */
+    .nav-menu {
+      position: sticky;
+      top: 0;
+      background: #2c3e50;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 4px;
+      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .nav-menu a {
+      display: block;
+      padding: 14px 18px;
+      color: #ecf0f1;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95em;
+      transition: all 0.2s;
+      border-radius: 4px;
+    }
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      background: #3498db;
+      color: white;
+    }
+
+    /* ===== CONTENU PRINCIPAL ===== */
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    section {
+      scroll-margin-top: 70px; /* pour compenser le menu fixe */
+      background: white;
+      padding: 25px;
+      margin: 25px 0;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin: 40px 0 20px;
+      font-size: 1.8em;
+    }
+    h2 {
+      color: #2980b9;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 6px;
+      margin-top: 0;
+    }
+    h3 {
+      color: #16a085;
+      margin-top: 20px;
+    }
+    .affaire {
+      background: #f8fafc;
+      padding: 16px;
+      border-left: 4px solid #3498db;
+      margin: 16px 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      margin: 40px 0 20px;
+      color: #7f8c8d;
+      font-size: 0.9em;
+    }
   </style>
 </head>
 <body>
-  <h1>🩺 LegiMedTravQ — Proxy Test</h1>
-  <p>Teste ton proxy sécurisé avec <code>llama-4-maverick:free</code>.</p>
 
-  <label for="prompt">Question (ex: rôle du médecin du travail en Algérie) :</label>
-  <textarea id="prompt" placeholder="Bonjour, peux-tu m'expliquer...">Quel est le cadre légal de la prévention en santé au travail en Algérie ?</textarea><br>
+  <!-- ===== MENU DE NAVIGATION ===== -->
+  <nav>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="#briefing" class="nav-link">📌 Briefing</a></li>
+      <li><a href="#dossier1" class="nav-link">📁 Dossier 1</a></li>
+      <li><a href="#dossier2" class="nav-link">📁 Dossier 2</a></li>
+      <li><a href="#dossier3" class="nav-link">📁 Dossier 3</a></li>
+      <li><a href="#dossier4" class="nav-link">📁 Dossier 4</a></li>
+      <li><a href="#debriefing" class="nav-link">📝 Debriefing</a></li>
+    </ul>
+  </nav>
 
-  <button id="send">💬 Envoyer</button>
-  <small id="status"></small>
+  <!-- ===== CONTENU ===== -->
+  <div class="container">
 
-  <div id="response"></div>
+    <h1>🩺 LegiMedTravQ — SST Algérie</h1>
 
+    <!-- BRIEFING -->
+    <section id="briefing">
+      <h2>📌 Briefing</h2>
+      <p><strong>Objectif :</strong> Aider les professionnels de la SST (médecins du travail, préventeurs) à analyser les dilemmes éthiques et juridiques dans le cadre du droit algérien du travail.</p>
+      <p><strong>Méthode :</strong> Chaque dossier présente des cas réels ou typiques. Vous pouvez explorer les affaires, réfléchir aux enjeux, puis — si souhaité — poser une question à l’IA pour obtenir un éclairage réglementaire.</p>
+    </section>
+
+    <!-- DOSSIER 1 -->
+    <section id="dossier1">
+      <h2>📁 Dossier 1 : Dilemmes éthiques</h2>
+
+      <div class="affaire">
+        <h3>🔸 Affaire n°1 : Le secret médical sous pression</h3>
+        <p><strong>Contexte :</strong> Un DRH exerce une pression pour obtenir des informations médicales sur un salarié en arrêts maladie répétés.</p>
+      </div>
+
+      <div class="affaire">
+        <h3>🔸 Affaire n°2 : L'obligation de conseil oubliée</h3>
+        <p><strong>Contexte :</strong> Un risque psychosocial est détecté, mais le médecin référent ne signale rien à la hiérarchie.</p>
+      </div>
+
+      <div class="affaire">
+        <h3>🔸 Affaire n°3 : Le silence face au danger</h3>
+        <p><strong>Contexte :</strong> Un travailleur signale un risque imminent (ex. machine défectueuse), mais la hiérarchie l’ignore.</p>
+      </div>
+    </section>
+
+    <!-- DOSSIER 2 -->
+    <section id="dossier2">
+      <h2>📁 Dossier 2 : Surveillance médicale adaptée</h2>
+      <p>À venir — Organisation du suivi médical selon les postes :</p>
+      <ul>
+        <li>Administratifs (bureau)</li>
+        <li>Risques renforcés (bruit, poussières, postures)</li>
+        <li>Postes à Surveillance Particulière (SPP)</li>
+      </ul>
+    </section>
+
+    <!-- DOSSIER 3 -->
+    <section id="dossier3">
+      <h2>📁 Dossier 3 : Audit & outils réglementaires</h2>
+      <p>À venir — Documents clés à maîtriser :</p>
+      <ul>
+        <li>Fiches de poste</li>
+        <li>Registre des risques</li>
+        <li>Dossier médical du travailleur</li>
+        <li>Rapport annuel d’activité</li>
+      </ul>
+    </section>
+
+    <!-- DOSSIER 4 -->
+    <section id="dossier4">
+      <h2>📁 Dossier 4 : Écosystème en temps de crise</h2>
+      <p>À revenir — Gestion coordonnée des crises :</p>
+      <ul>
+        <li>Alertes internes & externes</li>
+        <li>Collaboration CHS / Inspection / CNAS / Hygiène</li>
+        <li>Retour d’expérience post-crise</li>
+      </ul>
+    </section>
+
+    <!-- DEBRIEFING -->
+    <section id="debriefing">
+      <h2>📝 Debriefing</h2>
+      <p>Merci d’avoir exploré <strong>LegiMedTravQ</strong> !</p>
+      <p>Cet outil est en cours de développement. Vos retours sont précieux pour l’adapter aux besoins réels des professionnels SST en Algérie.</p>
+      <p>➡️ Prochaine étape : intégration de l’IA via proxy sécurisé pour des réponses contextualisées.</p>
+    </section>
+
+  </div>
+
+  <footer>
+    © 2025 Nezzal Abdelmalek — Projet réalisé dans le cadre de la formation Citizencode
+  </footer>
+
+  <!-- ===== SCRIPT NAVIGATION ===== -->
   <script>
-    const sendBtn = document.getElementById('send');
-    const promptInput = document.getElementById('prompt');
-    const responseDiv = document.getElementById('response');
-    const statusSpan = document.getElementById('status');
+    document.addEventListener('DOMContentLoaded', () => {
+      const navLinks = document.querySelectorAll('.nav-link');
+      const sections = document.querySelectorAll('section');
 
-    // 🔁 URL de ton proxy (à adapter si déployé ailleurs)
-    const PROXY_URL = 'https://legimedtravq-proxy-clean.vercel.app/api/route';
-    // const PROXY_URL = '/api/route'; // si intégré dans le même domaine Next.js
+      // Scroll fluide
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href');
+          const targetSection = document.querySelector(targetId);
+          if (targetSection) {
+            window.scrollTo({
+              top: targetSection.offsetTop - 70, // compense le menu fixe
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
 
-    sendBtn.addEventListener('click', async () => {
-      const prompt = promptInput.value.trim();
-      if (!prompt) return;
-
-      sendBtn.disabled = true;
-      statusSpan.textContent = '📡 Envoi en cours…';
-      responseDiv.className = '';
-      responseDiv.textContent = '';
-
-      try {
-        const res = await fetch(PROXY_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            messages: [
-              { role: 'system', content: 'Tu es un expert en santé et sécurité au travail (SST) en Algérie. Réponds de façon claire, précise, en français.' },
-              { role: 'user', content: prompt }
-            ],
-            // model: 'qwen/qwen3-max', // ⏳ Décommenter à la conférence
-          })
+      // Mettre à jour la classe "active" en scrollant
+      const updateActiveLink = () => {
+        let currentSection = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - 80;
+          const sectionHeight = section.offsetHeight;
+          if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+            currentSection = section.getAttribute('id');
+          }
         });
 
-        const data = await res.json();
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${currentSection}`) {
+            link.classList.add('active');
+          }
+        });
+      };
 
-        if (!res.ok) {
-          throw new Error(data.error?.message || `HTTP ${res.status}`);
-        }
-
-        // Afficher la réponse
-        const content = data.choices?.[0]?.message?.content || '[Pas de réponse]';
-        responseDiv.textContent = content;
-        statusSpan.textContent = `✅ Réponse reçue (${data.usage?.total_tokens || '?'} tokens)`;
-
-      } catch (err) {
-        console.error('Erreur:', err);
-        responseDiv.className = 'error';
-        responseDiv.textContent = `❌ Erreur : ${err.message}`;
-        statusSpan.textContent = '';
-      } finally {
-        sendBtn.disabled = false;
-      }
-    });
-
-    // ⌨️ Soumettre avec Entrée
-    promptInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendBtn.click();
-      }
+      window.addEventListener('scroll', updateActiveLink);
+      updateActiveLink(); // au chargement
     });
   </script>
+
 </body>
 </html>
