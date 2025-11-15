@@ -196,7 +196,7 @@
         </div>
 
         <div class="ai-button-container">
-          <button class="ai-button">✨ Interroger LegiMedTrav-AI</button>
+          <button class="ai-button" type="button">✨ Interroger LegiMedTrav-AI</button>
         </div>
       </div>
 
@@ -247,7 +247,7 @@
         </div>
 
         <div class="ai-button-container">
-          <button class="ai-button">✨ Interroger LegiMedTrav-AI</button>
+          <button class="ai-button" type="button">✨ Interroger LegiMedTrav-AI</button>
         </div>
       </div>
 
@@ -291,7 +291,7 @@
         </div>
 
         <div class="ai-button-container">
-          <button class="ai-button">✨ Interroger LegiMedTrav-AI</button>
+          <button class="ai-button" type="button">✨ Interroger LegiMedTrav-AI</button>
         </div>
       </div>
     </div>
@@ -462,48 +462,112 @@
   </style>
 
   <!-- SCRIPTS -->
-  <script>
-    // Gestion des onglets principaux (Briefing, Dossiers, etc.)
-    document.addEventListener('DOMContentLoaded', function () {
-      const mainTabs = document.querySelectorAll('.tab');
-      const mainContents = document.querySelectorAll('.tab-content');
+ <script>
+  // Gestion des onglets principaux
+  document.addEventListener('DOMContentLoaded', function () {
+    const mainTabs = document.querySelectorAll('.tab');
+    const mainContents = document.querySelectorAll('.tab-content');
 
-      mainTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          // Désactiver tous les onglets et contenus
-          mainTabs.forEach(t => t.classList.remove('active'));
-          mainContents.forEach(c => c.classList.remove('active'));
+    mainTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        mainTabs.forEach(t => t.classList.remove('active'));
+        mainContents.forEach(c => c.classList.remove('active'));
 
-          // Activer l'onglet cliqué
-          tab.classList.add('active');
-
-          // Afficher le contenu correspondant
-          const targetId = tab.dataset.tab;
-          document.getElementById(targetId).classList.add('active');
-        });
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab).classList.add('active');
       });
-
-      // Gestion des onglets d'affaires dans le Dossier 1
-      const affaireTabs = document.querySelectorAll('.affaire-tab');
-      const affaireContents = document.querySelectorAll('.affaire-content');
-
-      affaireTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          affaireTabs.forEach(t => t.classList.remove('active'));
-          affaireContents.forEach(c => c.classList.remove('active'));
-
-          tab.classList.add('active');
-
-          const affaireId = tab.dataset.affaire;
-          document.getElementById(`affaire${affaireId}`).classList.add('active');
-        });
-      });
-
-      // Initialisation : afficher la première affaire par défaut
-      if (affaireContents.length > 0) {
-        affaireContents[0].classList.add('active');
-      }
     });
-  </script>
+
+    // Gestion des onglets d'affaires dans Dossier 1
+    const affaireTabs = document.querySelectorAll('.affaire-tab');
+    const affaireContents = document.querySelectorAll('.affaire-content');
+
+    affaireTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        affaireTabs.forEach(t => t.classList.remove('active'));
+        affaireContents.forEach(c => c.classList.remove('active'));
+
+        tab.classList.add('active');
+        document.getElementById(`affaire${tab.dataset.affaire}`).classList.add('active');
+      });
+    });
+
+    if (affaireContents.length > 0) {
+      affaireContents[0].classList.add('active');
+    }
+
+    // === 🔥 ACTIVATION DES BOUTONS IA ===
+    const aiButtons = document.querySelectorAll('.ai-button');
+    aiButtons.forEach(button => {
+      button.addEventListener('click', handleAIButtonClick);
+    });
+  });
+
+  // 📥 Récupère le texte de la question complète de l'affaire active
+  function getCurrentQuestion() {
+    const activeAffaire = document.querySelector('.affaire-content.active');
+    if (!activeAffaire) return null;
+
+    const title = activeAffaire.querySelector('h3').innerText.trim();
+    const summary = activeAffaire.querySelector('.case-summary').innerText.trim();
+    const questionList = activeAffaire.querySelector('.question-section ol').innerText.trim();
+    const format = activeAffaire.querySelector('.response-format').innerText.replace('FORMAT DE RÉPONSE EXIGÉ :', '').trim();
+
+    return `${title}\n\nContexte : ${summary}\n\n❓ Question détaillée :\n${questionList}\n\n📝 Exigence de format :\n${format}`;
+  }
+
+  // 🚀 Envoie la requête au proxy
+  async function askLegiMedTravAI(question) {
+    const button = event.target;
+    const originalText = button.innerHTML;
+    button.disabled = true;
+    button.innerHTML = '⏳ Envoi en cours...';
+
+    try {
+      const response = await fetch('https://legimedtravq-proxy-clean.vercel.app/api/route', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: [
+            {
+              role: "system",
+              content: "Vous êtes LegiMedTrav-AI, un expert juridique en médecine du travail en Algérie. Répondez de façon précise, pédagogique, et toujours avec des références légales exactes [Texte, Article, Alinéa]."
+            },
+            { role: "user", content: question }
+          ]
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || `Erreur ${response.status}`);
+      }
+
+      // ✅ Succès — on affiche la réponse dans un modal léger (ou alert pour MVP)
+      const answer = data.choices?.[0]?.message?.content || data.content || "Aucune réponse reçue.";
+
+      // 🎯 Affichage simple (on améliorera → popup ou zone dédiée)
+      alert(`✅ Réponse de LegiMedTrav-AI :\n\n${answer}`);
+
+    } catch (err) {
+      console.error('❌ Erreur IA:', err);
+      alert(`❌ Erreur lors de l'appel à LegiMedTrav-AI :\n${err.message}\n\nVérifiez la console.`);
+    } finally {
+      button.disabled = false;
+      button.innerHTML = originalText;
+    }
+  }
+
+  // 🖱️ Gestionnaire du clic sur "Interroger LegiMedTrav-AI"
+  function handleAIButtonClick(event) {
+    const question = getCurrentQuestion();
+    if (!question) {
+      alert('⚠️ Impossible de récupérer la question. Sélectionnez une affaire.');
+      return;
+    }
+    askLegiMedTravAI(question);
+  }
+</script>
 </body>
 </html>
