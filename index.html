@@ -6,11 +6,7 @@
   <title>LegiMedTrav-Q | Mission — Bâtir la Prévention</title>
   <meta name="description" content="Outil d'aide à la décision éthique et réglementaire pour les médecins du travail en Algérie.">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       background-color: #121212;
@@ -20,10 +16,7 @@
       padding: 20px;
     }
 
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+    .container { max-width: 1000px; margin: 0 auto; }
 
     header {
       text-align: center;
@@ -32,19 +25,8 @@
       margin-bottom: 30px;
     }
 
-    h1 {
-      font-size: 2.4em;
-      color: #fbbf24;
-      margin-bottom: 10px;
-      font-weight: 700;
-    }
-
-    .subtitle {
-      font-size: 1.1em;
-      color: #a0a0a0;
-      max-width: 800px;
-      margin: 0 auto;
-    }
+    h1 { font-size: 2.4em; color: #fbbf24; margin-bottom: 10px; font-weight: 700; }
+    .subtitle { font-size: 1.1em; color: #a0a0a0; max-width: 800px; margin: 0 auto; }
 
     .tabs {
       display: flex;
@@ -67,30 +49,17 @@
       transition: all 0.2s;
     }
 
-    .tab:hover {
-      background: #3d3d3d;
-    }
+    .tab:hover { background: #3d3d3d; }
+    .tab.active { background: #fbbf24; color: #121212; }
 
-    .tab.active {
-      background: #fbbf24;
-      color: #121212;
-    }
-
-    .tab-content {
-      display: none;
-      animation: fadeIn 0.4s ease;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
+    .tab-content { display: none; animation: fadeIn 0.4s ease; }
+    .tab-content.active { display: block; }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* DOSSIER 1 STYLES */
     #dossier1 {
       padding: 20px;
       background-color: #1a1a1a;
@@ -132,15 +101,8 @@
       transition: all 0.2s;
     }
 
-    .affaire-tab:hover {
-      background: #3d3d3d;
-    }
-
-    .affaire-tab.active {
-      background: #fbbf24;
-      color: #121212;
-      border-color: #fbbf24;
-    }
+    .affaire-tab:hover { background: #3d3d3d; }
+    .affaire-tab.active { background: #fbbf24; color: #121212; border-color: #fbbf24; }
 
     .affaire-content {
       display: none;
@@ -151,14 +113,9 @@
       margin-top: 10px;
     }
 
-    .affaire-content.active {
-      display: block;
-    }
+    .affaire-content.active { display: block; }
 
-    .lock-icon {
-      color: #fbbf24;
-      margin-right: 8px;
-    }
+    .lock-icon { color: #fbbf24; margin-right: 8px; }
 
     .case-summary {
       background: #252525;
@@ -174,9 +131,7 @@
       line-height: 1.6;
     }
 
-    .question-section ol li {
-      margin: 8px 0;
-    }
+    .question-section ol li { margin: 8px 0; }
 
     .response-format {
       margin: 20px 0;
@@ -211,11 +166,8 @@
       box-shadow: 0 6px 12px rgba(0,0,0,0.4);
     }
 
-    .ai-button:active {
-      transform: translateY(0);
-    }
+    .ai-button:active { transform: translateY(0); }
 
-    /* ZONE DE RÉPONSE IA */
     .ai-response-box {
       margin-top: 25px;
       border-radius: 8px;
@@ -250,9 +202,7 @@
       font-size: 0.9em;
     }
 
-    .ai-clear-btn:hover {
-      background: #555;
-    }
+    .ai-clear-btn:hover { background: #555; }
 
     .ai-response-content {
       padding: 16px;
@@ -264,13 +214,16 @@
       white-space: pre-wrap;
     }
 
-    .ai-response-text {
-      white-space: normal;
-    }
+    .ai-response-text { white-space: normal; }
 
-    .ref {
+    .ref { color: #fbbf24; font-weight: bold; }
+
+    .warning {
+      background: #3a2a1a;
+      border-left: 4px solid #f59e0b;
+      padding: 12px;
+      border-radius: 4px;
       color: #fbbf24;
-      font-weight: bold;
     }
 
     .error {
@@ -279,13 +232,6 @@
       padding: 12px;
       border-radius: 6px;
       border-left: 4px solid #ef4444;
-    }
-
-    .debug {
-      font-size: 0.85em;
-      color: #aaa;
-      margin-top: 10px;
-      font-family: monospace;
     }
 
     .ai-response-content::-webkit-scrollbar {
@@ -321,7 +267,6 @@
       <p class="subtitle">Mission — Bâtir la Prévention<br><em>Un outil pour les médecins du travail en Algérie — Conçu par Nezzal Abdelmalek</em></p>
     </header>
 
-    <!-- Navigation principale -->
     <div class="tabs">
       <button class="tab active" data-tab="briefing">Briefing</button>
       <button class="tab" data-tab="dossier1">Dossier 1</button>
@@ -331,7 +276,6 @@
       <button class="tab" data-tab="debriefing">Débriefing</button>
     </div>
 
-    <!-- ================ BRIEFING ================ -->
     <div id="briefing" class="tab-content active">
       <h2>📌 Briefing narratif</h2>
       <p><strong>À l’attention du Directeur de la Médecine du Travail,</strong></p>
@@ -340,21 +284,18 @@
       <p>➡️ Passez aux dossiers pour commencer.</p>
     </div>
 
-    <!-- ================ DOSSIER 1 (Updated) ================ -->
     <div id="dossier1" class="tab-content">
       <div class="folder-header">
         <span class="folder-icon">📁</span>
         <h2>Dossier 1 : Dilemmes éthiques et devoirs du médecin</h2>
       </div>
 
-      <!-- Onglets d'affaires -->
       <div class="affaire-tabs">
         <button class="affaire-tab active" data-affaire="1">Affaire n°1</button>
         <button class="affaire-tab" data-affaire="2">Affaire n°2</button>
         <button class="affaire-tab" data-affaire="3">Affaire n°3</button>
       </div>
 
-      <!-- Contenu des affaires -->
       <div id="affaire1" class="affaire-content active">
         <h3><span class="lock-icon">🔒</span> Affaire n°1 : Le secret médical sous pression</h3>
         <div class="case-summary">
@@ -495,25 +436,21 @@
       </div>
     </div>
 
-    <!-- ================ DOSSIER 2 ================ -->
     <div id="dossier2" class="tab-content">
       <h2>📁 Dossier 2 : Exposition aux agents chimiques</h2>
       <p><em>Contenu à compléter ultérieurement.</em></p>
     </div>
 
-    <!-- ================ DOSSIER 3 ================ -->
     <div id="dossier3" class="tab-content">
       <h2>📁 Dossier 3 : Santé mentale et risques psychosociaux</h2>
       <p><em>Contenu à compléter ultérieurement.</em></p>
     </div>
 
-    <!-- ================ DOSSIER 4 ================ -->
     <div id="dossier4" class="tab-content">
       <h2>📁 Dossier 4 : Suivi post-professionnel & pathologies émergentes</h2>
       <p><em>Contenu à compléter ultérieurement.</em></p>
     </div>
 
-    <!-- ================ DEBRIEFING ================ -->
     <div id="debriefing" class="tab-content">
       <h2>🎯 Débriefing & Prochaines étapes</h2>
       <p>✅ Vous avez exploré les principaux dilemmes éthiques du médecin du travail.</p>
@@ -532,7 +469,6 @@
     </footer>
   </div>
 
-  <!-- SCRIPTS -->
   <script>
     (function() {
       try {
@@ -591,8 +527,7 @@
           return text
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
             .replace(/\[(Référence.*?)\]/g, '<span class="ref">[$1]</span>')
-            .replace(/\n/g, '<br>')
-            .replace(/•/g, '•');
+            .replace(/\n/g, '<br>');
         }
 
         async function askLegiMedTravAI(question) {
@@ -626,7 +561,7 @@
                 messages: [
                   {
                     role: "system",
-                    content: "Vous êtes LegiMedTrav-AI, expert juridique en médecine du travail en Algérie. Répondez avec précision et références exactes [Texte, Article, Alinéa]."
+                    content: "Expert juridique algérien SST. Répondez court, précis, avec [Texte, Article]."
                   },
                   { role: "user", content: question }
                 ]
@@ -635,72 +570,54 @@
 
             const safeResponse = await response.json();
 
-            if (!response.ok) {
-              throw new Error(`HTTP ${response.status} — ${response.statusText}`);
-            }
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
             let displayContent = '';
 
             if (safeResponse.success && safeResponse.data?.choices?.[0]?.message?.content) {
-              const rawAnswer = safeResponse.data.choices[0].message.content;
-              displayContent = `<div class="ai-response-text">${formatResponse(rawAnswer)}</div>`;
+              const raw = safeResponse.data.choices[0].message.content;
+              const trimmed = raw.trim();
+
+              if (trimmed === '') {
+                displayContent = `
+                  <div class="warning">
+                    ⚠️ Le modèle gratuit a renvoyé une réponse vide (souvent dû à la charge serveur).
+                    <br>➡️ Cliquez à nouveau ou simplifiez la question.
+                  </div>
+                `;
+              } else {
+                displayContent = `<div class="ai-response-text">${formatResponse(trimmed)}</div>`;
+              }
             } else if (safeResponse.error) {
-              displayContent = `
-                <div class="error">
-                  ❌ Erreur du proxy : ${safeResponse.error}
-                </div>
-                ${safeResponse.details ? `<pre class="debug">${safeResponse.details.substring(0, 500)}...</pre>` : ''}
-              `;
-            } else if (safeResponse.data?.error) {
-              displayContent = `
-                <div class="error">
-                  ❌ Erreur OpenRouter : ${safeResponse.data.error.message || JSON.stringify(safeResponse.data.error)}
-                </div>
-              `;
+              displayContent = `<div class="error">❌ Erreur : ${safeResponse.error}</div>`;
             } else {
-              displayContent = `
-                <div class="error">
-                  ⚠️ Réponse inattendue. Vérifiez les logs Vercel.
-                </div>
-                <details>
-                  <summary>Données brutes (debug)</summary>
-                  <pre class="debug">${JSON.stringify(safeResponse, null, 2).substring(0, 1000)}</pre>
-                </details>
-              `;
+              displayContent = `<div class="error">⚠️ Réponse inattendue. Vérifiez les logs Vercel.</div>`;
             }
 
-            responseBox.querySelector('.ai-response-content').innerHTML = `
-              ${displayContent}
-              ${safeResponse.success ? '<div style="margin-top:15px;text-align:right;"><button class="copy-btn" type="button">📋 Copier</button></div>' : ''}
-            `;
+            responseBox.querySelector('.ai-response-content').innerHTML = displayContent +
+              (safeResponse.success && safeResponse.data?.choices?.[0]?.message?.content?.trim() ? 
+                '<div style="margin-top:15px;text-align:right;"><button class="copy-btn" type="button">📋 Copier</button></div>' : '');
 
-            if (safeResponse.success) {
-              const copyBtn = responseBox.querySelector('.copy-btn');
-              if (copyBtn) {
-                copyBtn.addEventListener('click', () => {
-                  const raw = safeResponse.data.choices[0].message.content;
-                  navigator.clipboard.writeText(raw).then(() => {
-                    alert('✅ Copié.');
-                  }).catch(() => alert('❌ Échec copie.'));
-                });
-              }
+            const copyBtn = responseBox.querySelector('.copy-btn');
+            if (copyBtn) {
+              copyBtn.addEventListener('click', () => {
+                const txt = safeResponse.data.choices[0].message.content.trim();
+                navigator.clipboard.writeText(txt).then(() => {
+                  alert('✅ Copié.');
+                }).catch(() => alert('❌ Échec.'));
+              });
             }
 
           } catch (err) {
-            console.error('💥 Erreur frontend:', err);
-            responseBox.querySelector('.ai-response-content').innerHTML = `
-              <div class="error">
-                ❌ Erreur réseau : ${err.message}
-                <br><small>Vérifiez la console (F12 → Console).</small>
-              </div>
-            `;
+            responseBox.querySelector('.ai-response-content').innerHTML = 
+              `<div class="error">❌ Erreur réseau : ${err.message}</div>`;
           }
         }
 
-        function handleAIButtonClick(event) {
+        function handleAIButtonClick() {
           const question = getCurrentQuestion();
           if (!question) {
-            alert('⚠️ Sélectionnez une affaire d’abord.');
+            alert('⚠️ Sélectionnez une affaire.');
             return;
           }
           askLegiMedTravAI(question);
@@ -708,7 +625,6 @@
 
       } catch (err) {
         console.error('❌ Erreur critique:', err);
-        alert('⚠️ Erreur système — contactez le développeur.');
       }
     })();
   </script>
