@@ -273,6 +273,21 @@
       font-weight: bold;
     }
 
+    .error {
+      color: #ef4444;
+      background: #2a1a1a;
+      padding: 12px;
+      border-radius: 6px;
+      border-left: 4px solid #ef4444;
+    }
+
+    .debug {
+      font-size: 0.85em;
+      color: #aaa;
+      margin-top: 10px;
+      font-family: monospace;
+    }
+
     .ai-response-content::-webkit-scrollbar {
       width: 6px;
     }
@@ -519,7 +534,6 @@
 
   <!-- SCRIPTS -->
   <script>
-    // Encapsule tout le code dans une IIFE pour éviter les conflits
     (function() {
       try {
         document.addEventListener('DOMContentLoaded', function () {
@@ -536,7 +550,6 @@
             });
           });
 
-          // Gestion des onglets d'affaires dans Dossier 1
           const affaireTabs = document.querySelectorAll('.affaire-tab');
           const affaireContents = document.querySelectorAll('.affaire-content');
 
@@ -554,14 +567,12 @@
             affaireContents[0].classList.add('active');
           }
 
-          // === 🔥 ACTIVATION DES BOUTONS IA ===
           const aiButtons = document.querySelectorAll('.ai-button');
           aiButtons.forEach(button => {
             button.addEventListener('click', handleAIButtonClick);
           });
         });
 
-        // 📥 Récupère le texte complet de l'affaire active
         function getCurrentQuestion() {
           const activeAffaire = document.querySelector('.affaire-content.active');
           if (!activeAffaire) return null;
@@ -575,23 +586,19 @@
           return `${title}\n\nContexte : ${summary}\n\n❓ Question détaillée :\n${questionList}\n\n📝 Exigence de format :\n${format}`;
         }
 
-        // 🎨 Formatage basique style Markdown → HTML
         function formatResponse(text) {
           if (!text) return '';
           return text
-            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // **gras**
-            .replace(/\[(Référence.*?)\]/g, '<span class="ref">[$1]</span>') // [Référence : ...] → jaune
-            .replace(/\n{2,}/g, '\n\n') // normaliser sauts
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\[(Référence.*?)\]/g, '<span class="ref">[$1]</span>')
             .replace(/\n/g, '<br>')
-            .replace(/•/g, '•'); // garder les puces
+            .replace(/•/g, '•');
         }
 
-        // 🚀 Envoi à l'IA + affichage dans la zone dédiée
         async function askLegiMedTravAI(question) {
           const activeAffaire = document.querySelector('.affaire-content.active');
           if (!activeAffaire) return;
 
-          // Créer ou récupérer la zone de réponse
           let responseBox = activeAffaire.querySelector('.ai-response-box');
           if (!responseBox) {
             responseBox = document.createElement('div');
@@ -604,13 +611,10 @@
               <div class="ai-response-content"><p>Chargement en cours…</p></div>
             `;
             activeAffaire.appendChild(responseBox);
-
-            // Gestion du bouton "Effacer"
             responseBox.querySelector('.ai-clear-btn').addEventListener('click', () => {
               responseBox.remove();
             });
           } else {
-            // Réinitialiser le contenu
             responseBox.querySelector('.ai-response-content').innerHTML = '<p>Chargement en cours…</p>';
           }
 
@@ -622,98 +626,89 @@
                 messages: [
                   {
                     role: "system",
-                    content: "Vous êtes LegiMedTrav-AI, un expert juridique en médecine du travail en Algérie. Répondez de façon précise, pédagogique, et toujours avec des références légales exactes [Texte, Article, Alinéa]."
+                    content: "Vous êtes LegiMedTrav-AI, expert juridique en médecine du travail en Algérie. Répondez avec précision et références exactes [Texte, Article, Alinéa]."
                   },
                   { role: "user", content: question }
                 ]
               })
             });
 
+            const safeResponse = await response.json();
+
             if (!response.ok) {
               throw new Error(`HTTP ${response.status} — ${response.statusText}`);
             }
 
-            const data = await response.json();
+            let displayContent = '';
 
-            // 🔍 Gestion robuste de la structure de réponse
-            let rawAnswer = "❌ Aucune réponse reçue.";
-            try {
-              if (!data) {
-                throw new Error("Données nulles");
-              }
-
-              // Cas 1 : format standard (OpenRouter, non-streamé)
-              if (Array.isArray(data.choices) && data.choices.length > 0) {
-                const choice = data.choices[0];
-                if (choice.message && typeof choice.message.content === 'string') {
-                  rawAnswer = choice.message.content;
-                } else if (choice.delta && typeof choice.delta.content === 'string') {
-                  rawAnswer = choice.delta.content;
-                } else {
-                  throw new Error("Structure 'message.content' ou 'delta.content' manquante");
-                }
-              } 
-              // Cas 2 : erreurs renvoyées par l'API
-              else if (data.error) {
-                rawAnswer = `❌ Erreur API : ${data.error.message || JSON.stringify(data.error)}`;
-              } 
-              // Cas 3 : autre format
-              else {
-                rawAnswer = `⚠️ Format inattendu. Réponse brute : <pre>${JSON.stringify(data, null, 2)}</pre>`;
-              }
-            } catch (parseErr) {
-              rawAnswer = `❌ Erreur de traitement : ${parseErr.message}\n\nDonnées reçues : <pre>${JSON.stringify(data, null, 2)}</pre>`;
+            if (safeResponse.success && safeResponse.data?.choices?.[0]?.message?.content) {
+              const rawAnswer = safeResponse.data.choices[0].message.content;
+              displayContent = `<div class="ai-response-text">${formatResponse(rawAnswer)}</div>`;
+            } else if (safeResponse.error) {
+              displayContent = `
+                <div class="error">
+                  ❌ Erreur du proxy : ${safeResponse.error}
+                </div>
+                ${safeResponse.details ? `<pre class="debug">${safeResponse.details.substring(0, 500)}...</pre>` : ''}
+              `;
+            } else if (safeResponse.data?.error) {
+              displayContent = `
+                <div class="error">
+                  ❌ Erreur OpenRouter : ${safeResponse.data.error.message || JSON.stringify(safeResponse.data.error)}
+                </div>
+              `;
+            } else {
+              displayContent = `
+                <div class="error">
+                  ⚠️ Réponse inattendue. Vérifiez les logs Vercel.
+                </div>
+                <details>
+                  <summary>Données brutes (debug)</summary>
+                  <pre class="debug">${JSON.stringify(safeResponse, null, 2).substring(0, 1000)}</pre>
+                </details>
+              `;
             }
 
-            const formattedAnswer = formatResponse(rawAnswer);
             responseBox.querySelector('.ai-response-content').innerHTML = `
-              <div class="ai-response-text">${formattedAnswer}</div>
-              <div style="margin-top: 15px; text-align: right;">
-                <button class="copy-btn" type="button">📋 Copier la réponse</button>
-              </div>
+              ${displayContent}
+              ${safeResponse.success ? '<div style="margin-top:15px;text-align:right;"><button class="copy-btn" type="button">📋 Copier</button></div>' : ''}
             `;
 
-            // Bouton "Copier la réponse"
-            responseBox.querySelector('.copy-btn').addEventListener('click', () => {
-              navigator.clipboard.writeText(rawAnswer.replace(/<[^>]*>/g, '')).then(() => {
-                alert('✅ Réponse copiée dans le presse-papiers.');
-              }).catch(err => {
-                alert('❌ Impossible de copier. Essayez manuellement.');
-              });
-            });
+            if (safeResponse.success) {
+              const copyBtn = responseBox.querySelector('.copy-btn');
+              if (copyBtn) {
+                copyBtn.addEventListener('click', () => {
+                  const raw = safeResponse.data.choices[0].message.content;
+                  navigator.clipboard.writeText(raw).then(() => {
+                    alert('✅ Copié.');
+                  }).catch(() => alert('❌ Échec copie.'));
+                });
+              }
+            }
 
           } catch (err) {
-            console.error('❌ Erreur IA globale:', err);
-            let errorMsg = `❌ Erreur réseau ou serveur : ${err.message}`;
-            if (err.name === 'TypeError' && err.message.includes('fetch')) {
-              errorMsg += '\n\n💡 Vérifiez votre connexion Internet.';
-            }
+            console.error('💥 Erreur frontend:', err);
             responseBox.querySelector('.ai-response-content').innerHTML = `
-              <div style="color:#ef4444; padding: 15px; border-left: 4px solid #ef4444; background: #2a1a1a;">
-                <h5>❌ Échec de la requête</h5>
-                <p>${errorMsg}</p>
-                <p>👉 Testez manuellement :</p>
-                <pre style="background:#1a1a1a; padding:10px; border-radius:4px; margin:10px 0; font-family:monospace; overflow-x:auto;">curl -X POST https://legimedtravq-proxy-clean.vercel.app/api/route \\
-  -H "Content-Type: application/json" \\
-  -d '{"messages": [{"role":"user","content":"Test"}]}'</pre>
+              <div class="error">
+                ❌ Erreur réseau : ${err.message}
+                <br><small>Vérifiez la console (F12 → Console).</small>
               </div>
             `;
           }
         }
 
-        // 🖱️ Gestionnaire du clic
         function handleAIButtonClick(event) {
           const question = getCurrentQuestion();
           if (!question) {
-            alert('⚠️ Impossible de récupérer la question. Sélectionnez une affaire.');
+            alert('⚠️ Sélectionnez une affaire d’abord.');
             return;
           }
           askLegiMedTravAI(question);
         }
 
       } catch (err) {
-        console.error('❌ Erreur critique dans LegiMedTravQ:', err);
-        alert('⚠️ Une erreur technique empêche le bon fonctionnement. Essayez en mode navigation privée ou contactez le développeur.');
+        console.error('❌ Erreur critique:', err);
+        alert('⚠️ Erreur système — contactez le développeur.');
       }
     })();
   </script>
