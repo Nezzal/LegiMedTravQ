@@ -630,18 +630,42 @@
             });
 
             if (!response.ok) {
-              throw new Error(`Serveur inaccessible (HTTP ${response.status})`);
+              throw new Error(`HTTP ${response.status} — ${response.statusText}`);
             }
 
             const data = await response.json();
 
-            if (!data || !data.choices?.[0]?.message?.content) {
-              throw new Error("Aucune réponse reçue du modèle.");
+            // 🔍 Gestion robuste de la structure de réponse
+            let rawAnswer = "❌ Aucune réponse reçue.";
+            try {
+              if (!data) {
+                throw new Error("Données nulles");
+              }
+
+              // Cas 1 : format standard (OpenRouter, non-streamé)
+              if (Array.isArray(data.choices) && data.choices.length > 0) {
+                const choice = data.choices[0];
+                if (choice.message && typeof choice.message.content === 'string') {
+                  rawAnswer = choice.message.content;
+                } else if (choice.delta && typeof choice.delta.content === 'string') {
+                  rawAnswer = choice.delta.content;
+                } else {
+                  throw new Error("Structure 'message.content' ou 'delta.content' manquante");
+                }
+              } 
+              // Cas 2 : erreurs renvoyées par l'API
+              else if (data.error) {
+                rawAnswer = `❌ Erreur API : ${data.error.message || JSON.stringify(data.error)}`;
+              } 
+              // Cas 3 : autre format
+              else {
+                rawAnswer = `⚠️ Format inattendu. Réponse brute : <pre>${JSON.stringify(data, null, 2)}</pre>`;
+              }
+            } catch (parseErr) {
+              rawAnswer = `❌ Erreur de traitement : ${parseErr.message}\n\nDonnées reçues : <pre>${JSON.stringify(data, null, 2)}</pre>`;
             }
 
-            const rawAnswer = data.choices[0].message.content;
             const formattedAnswer = formatResponse(rawAnswer);
-
             responseBox.querySelector('.ai-response-content').innerHTML = `
               <div class="ai-response-text">${formattedAnswer}</div>
               <div style="margin-top: 15px; text-align: right;">
@@ -651,7 +675,7 @@
 
             // Bouton "Copier la réponse"
             responseBox.querySelector('.copy-btn').addEventListener('click', () => {
-              navigator.clipboard.writeText(rawAnswer).then(() => {
+              navigator.clipboard.writeText(rawAnswer.replace(/<[^>]*>/g, '')).then(() => {
                 alert('✅ Réponse copiée dans le presse-papiers.');
               }).catch(err => {
                 alert('❌ Impossible de copier. Essayez manuellement.');
@@ -659,29 +683,21 @@
             });
 
           } catch (err) {
-            console.error('❌ Erreur IA:', err);
+            console.error('❌ Erreur IA globale:', err);
+            let errorMsg = `❌ Erreur réseau ou serveur : ${err.message}`;
+            if (err.name === 'TypeError' && err.message.includes('fetch')) {
+              errorMsg += '\n\n💡 Vérifiez votre connexion Internet.';
+            }
             responseBox.querySelector('.ai-response-content').innerHTML = `
               <div style="color:#ef4444; padding: 15px; border-left: 4px solid #ef4444; background: #2a1a1a;">
-                <h5>❌ Problème de connexion</h5>
-                <p>Le service IA est actuellement indisponible.</p>
-                <p><strong>Raison probable :</strong> Vérifiez que le proxy est déployé et que la clé OpenRouter est définie.</p>
+                <h5>❌ Échec de la requête</h5>
+                <p>${errorMsg}</p>
                 <p>👉 Testez manuellement :</p>
                 <pre style="background:#1a1a1a; padding:10px; border-radius:4px; margin:10px 0; font-family:monospace; overflow-x:auto;">curl -X POST https://legimedtravq-proxy-clean.vercel.app/api/route \\
   -H "Content-Type: application/json" \\
-  -d '{"messages": [{"role":"user","content":"${encodeURIComponent(question.substring(0, 100))}..."}]}'</pre>
-                <p>💡 Pour l’instant, vous pouvez copier la question ci-dessous et la coller dans ChatGPT / Llama / DeepSeek.</p>
-                <button class="copy-question-btn" type="button" style="background:#444; color:#fbbf24; padding:6px 12px; border:none; border-radius:4px; cursor:pointer;">📋 Copier la question</button>
+  -d '{"messages": [{"role":"user","content":"Test"}]}'</pre>
               </div>
             `;
-
-            // Bouton "Copier la question"
-            responseBox.querySelector('.copy-question-btn').addEventListener('click', () => {
-              navigator.clipboard.writeText(question).then(() => {
-                alert('✅ Question copiée dans le presse-papiers.');
-              }).catch(err => {
-                alert('❌ Impossible de copier. Sélectionnez et copiez manuellement.');
-              });
-            });
           }
         }
 
